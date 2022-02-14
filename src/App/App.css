@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  display: flex;
 }
 
 .App-logo {
@@ -22,6 +23,7 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+  flex: 1;
 }
 
 .App-link {
@@ -66,9 +68,10 @@
 }
 
 .sidebar-wrapper {
-  float: right;
+  margin-right: auto;
   background-color: cadetblue;
-  height: 100vh;
+  height: inherit;
+  position: relative;
 }
 .sidebar-wrapper ul {
   list-style: none;
@@ -84,4 +87,9 @@
 .sidebar-wrapper .home {
   background-color: #bec6d4;
   width: 100%;
+}
+
+
+.detail-table-container table, th, td {
+  border: 1px solid white;
 }

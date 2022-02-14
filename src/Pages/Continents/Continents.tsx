@@ -4,7 +4,8 @@ import {
   useQuery,
   gql
 } from "@apollo/client";
-import CountriesList from './components/CountriesList';
+import CountriesList, { Country } from './components/CountriesList';
+import CountriesDetail from './components/CountriesDetail';
 
 interface IContinent {
   name?: string;
@@ -35,15 +36,26 @@ type Continent = {
 
 const Continents: React.FunctionComponent<IContinentsProps> = (props) => {
   const [selectedContinent, setSelectedContinent] = React.useState('');
+  const [selectedCountry, setSelectedCountry] = React.useState<Country | undefined>();
+  const [isDetailOpen, setIsDetailOpen] = React.useState(false);
   const { loading, error, data } = useQuery(CONTINENTS_QUERY);
   const { continents } = props;
 
-
+const toggleDetail = () => {
+  setIsDetailOpen(!isDetailOpen);
+}
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error :(</p>;
   console.log('selectedContinent', selectedContinent);
   return (
+    isDetailOpen
+    ?
+    <div className='detail-wrapper'>
+      <span style={{ cursor: 'pointer' }} onClick={toggleDetail}>Back</span>
+      <CountriesDetail country={selectedCountry} />
+    </div>
+    :
     <div>
       <span>Kıtalar:</span>
       <select value={selectedContinent} onChange={(e) => {
@@ -56,7 +68,7 @@ const Continents: React.FunctionComponent<IContinentsProps> = (props) => {
       </select>
       <div>{JSON.stringify(selectedContinent)}</div>
       {selectedContinent && data &&
-        <CountriesList continentCode={selectedContinent} />
+        <CountriesList onDetailClick={toggleDetail} continentCode={selectedContinent} setSelectedCountry={setSelectedCountry} />
       }
     </div>
   );

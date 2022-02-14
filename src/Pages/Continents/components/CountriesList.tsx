@@ -5,9 +5,13 @@ import {
   gql
 } from "@apollo/client";
 import ReactCountryFlag from 'react-country-flag';
+import { sortByName } from '../../../App/helper';
 
 interface ICountriesListProps {
   continentCode: string;
+  // onDetailClick: React.MouseEventHandler<HTMLButtonElement>;
+  onDetailClick: Function;
+  setSelectedCountry: Function;
 }
 
 const GET_COUNTRIES = gql`
@@ -18,20 +22,40 @@ const GET_COUNTRIES = gql`
       emoji,
       emojiU,
       capital,
+      continent {
+        code,
+        name,
+      },
+      languages {
+        code,
+        name,
+      },
     }
   }
 `;
 
-type Country = {
+export type Continent = {
+  code: string,
+  name: string,
+};
+
+export type Language = {
+  code: string,
+  name: string,
+};
+
+export type Country = {
   code: string,
   name: string,
   emoji: string,
   emojiU: string,
   capital: string,
+  languages: Array<Language>,
+  continent: Continent,
 };
 
 const CountriesList: React.FunctionComponent<ICountriesListProps> = (props) => {
-  const { continentCode } = props;
+  const { continentCode, onDetailClick, setSelectedCountry } = props;
   const { loading, error, data } = useQuery(GET_COUNTRIES, {
     variables: {
       filter: {
@@ -49,9 +73,16 @@ const CountriesList: React.FunctionComponent<ICountriesListProps> = (props) => {
     return decoded.toLowerCase();
   }
 
+  const handleClick = (country: Country) => {
+    setSelectedCountry(country);
+    onDetailClick();
+  }
+
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error :(</p>;
+  const sortedCountries = [...data.countries].sort(sortByName);
+
   console.log('data2', data); // decodeUriCode(c.emojiU)
   return (
     <div className='list-container'>
@@ -64,7 +95,7 @@ const CountriesList: React.FunctionComponent<ICountriesListProps> = (props) => {
           <span style={{ fontSize: '1rem' }}> Flag</span>
         </div>
       }
-      {data && data.countries.map((c: Country) => (
+      {sortedCountries.map((c: Country) => (
         <div className='list-row'
         // style={{ display: 'flex', flexDirection: 'row', alignItems: 'baseline', marginBottom: '20px' }}
         >
@@ -80,9 +111,7 @@ const CountriesList: React.FunctionComponent<ICountriesListProps> = (props) => {
           <span>
             <ReactCountryFlag countryCode={c.code} svg />
           </span>
-          <button style={{ marginLeft: 'auto' }}>temp</button>
-          {/* <Emoji uri={decodeUriCode(c.emojiU)} /> */}
-          {/* <span className='emoji' role="img" aria-label={c.emojiU}>{decodeUriCode(c.emojiU)}</span> */}
+          <button onClick={(e) => handleClick(c)} style={{ marginLeft: 'auto' }}>detail</button>
         </div>
       ))}
     </div>
