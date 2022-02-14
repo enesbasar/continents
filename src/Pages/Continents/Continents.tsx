@@ -4,15 +4,15 @@ import {
   useQuery,
   gql
 } from "@apollo/client";
-import CountriesList from './CountriesList';
+import CountriesList from './components/CountriesList';
 
 interface IContinent {
-  name: string;
-  value: number;
+  name?: string;
+  value?: number;
 }
 
 interface IContinentsProps {
-  continents: Array<IContinent>;
+  continents?: Array<IContinent>;
 }
 
 const CONTINENTS_QUERY = gql`

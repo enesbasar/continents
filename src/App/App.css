@@ -64,3 +64,24 @@
   color: skyblue;
   width: 100%;
 }
+
+.sidebar-wrapper {
+  float: right;
+  background-color: cadetblue;
+  height: 100vh;
+}
+.sidebar-wrapper ul {
+  list-style: none;
+  margin-left: 0.5rem;
+  padding-left: 0px;
+}
+.sidebar-wrapper li {
+  margin-bottom: 2rem;
+}
+.sidebar-wrapper a {
+  display: contents;
+}
+.sidebar-wrapper .home {
+  background-color: #bec6d4;
+  width: 100%;
+}
