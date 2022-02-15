@@ -42,7 +42,6 @@ const CountriesDetail: React.FunctionComponent<ICountriesDetailProps> = (props) 
   // }
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error :(</p>;
-  console.log('selected country', country);
   const filteredData = data && country && data.countries.filter((c: Country) => {
     return c.languages.some(el => country.languages.some(el2 => el2.code === el.code));
   });
@@ -54,8 +53,6 @@ const CountriesDetail: React.FunctionComponent<ICountriesDetailProps> = (props) 
   const getCountryByContinent = (data: Array<Country>, continent: Continent) => {
     return sortedData.filter((country: Country) => country.continent.code === continent.code).sort(sortByContinent);
   }
-  console.log('uniques continents', selectedLanguageSpokenContinents);
-  console.log('filtered countries', filteredData);
   return (
     <div className='detail-table-container'>
       <table>

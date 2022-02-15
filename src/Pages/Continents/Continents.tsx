@@ -48,7 +48,6 @@ const toggleDetail = () => {
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error :(</p>;
-  console.log('selectedContinent', selectedContinent);
   return (
     isDetailOpen
     ?
@@ -58,9 +57,8 @@ const toggleDetail = () => {
     </div>
     :
     <div>
-      <span>Kıtalar:</span>
+      <span>Continents:</span>
       <select value={selectedContinent} onChange={(e) => {
-        console.log(e.target);
         setSelectedContinent(e.target.value);
       }} style={{ width: '150px' }} name="continents">
         {data.continents.map((c: Continent) => (

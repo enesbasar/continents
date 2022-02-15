@@ -84,7 +84,6 @@ const CountriesList: React.FunctionComponent<ICountriesListProps> = (props) => {
   if (error) return <p>Error :(</p>;
   const sortedCountries = [...data.countries].sort(sortByName);
 
-  console.log('data2', data); // decodeUriCode(c.emojiU)
   return (
     <div className='list-container'>
       {data &&

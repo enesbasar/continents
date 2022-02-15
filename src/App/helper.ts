@@ -5,7 +5,6 @@ export const sortByContinent = (a: any, b: any) => {
 }
 
 export const sortByName = (a: any, b: any) => {
-  console.log('a:', a, 'b', b);
   var textA = a.name.toUpperCase();
   var textB = b.name.toUpperCase();
   return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
