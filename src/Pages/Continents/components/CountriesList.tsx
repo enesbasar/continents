@@ -37,6 +37,7 @@ const GET_COUNTRIES = gql`
 export type Continent = {
   code: string,
   name: string,
+  countries: Array<Country>,
 };
 
 export type Language = {
@@ -65,13 +66,13 @@ const CountriesList: React.FunctionComponent<ICountriesListProps> = (props) => {
       }
     }
   });
-  const decodeUriCode = (uri: String) => {
-    const splitted = uri.split(' ');
-    const stripped = splitted[0].split('+')[1];
-    const stripped2 = splitted[1].split('+')[1];
-    const decoded = `"\\U${stripped}\\U${stripped2}"`;
-    return decoded.toLowerCase();
-  }
+  // const decodeUriCode = (uri: String) => {
+  //   const splitted = uri.split(' ');
+  //   const stripped = splitted[0].split('+')[1];
+  //   const stripped2 = splitted[1].split('+')[1];
+  //   const decoded = `"\\U${stripped}\\U${stripped2}"`;
+  //   return decoded.toLowerCase();
+  // }
 
   const handleClick = (country: Country) => {
     setSelectedCountry(country);

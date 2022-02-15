@@ -4,6 +4,7 @@ import './App.css';
 import Continents from '../Pages/Continents/Continents';
 import ExchangeRates from '../ExchangeRates';
 import { BrowserRouter, Link, Route, Router, Routes } from 'react-router-dom';
+import ContinentChart from '../Pages/ContinentChart/ContinentChart';
 
 function App() {
   return (
@@ -31,12 +32,16 @@ function App() {
             <li>
               <Link to="/continents">Continents</Link>
             </li>
+            <li>
+              <Link to="/chart">Chart</Link>
+            </li>
           </ul>
         </div>
         <header className="App-header">
           <Routes>
             <Route path="/" element={<div>Welcome</div>} />
             <Route path="/continents" element={<Continents />} />
+            <Route path="/chart" element={<ContinentChart />} />
           </Routes>
         </header>
       </div>

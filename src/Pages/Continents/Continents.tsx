@@ -32,6 +32,7 @@ const CONTINENTS_QUERY = gql`
 type Continent = {
   code: string,
   name: string,
+  countries: Array<Country>,
 };
 
 const Continents: React.FunctionComponent<IContinentsProps> = (props) => {
